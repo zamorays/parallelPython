@@ -1,0 +1,84 @@
+This is a try to get the principal tricks to install a parallel enviroment for examples showing here!
+At least this works for UBUNTU 12.04 (i belive that for almost all linux distributions with pertinent considerations).
+
+FIRTS: In many cases for get the latest distributions of python libraries, cuda libraries, opencl extensions, etc.
+    its a good idea to use git distribution for manage all this packages.
+
+    If you dont have git installed, type:
+
+	USER$ sudo apt-get install git
+
+    courisly, for get the latest git, you have to use git!. To get some repos to build in your PC only type:
+
+	USER$ git clone http://git_disttribution_of_you_want
+
+    Almost everything in git online repos has a good INSTALL documentation, the best part is that 
+    generally include many examples.
+
+SECOND: PYTHON ENVIROMENT. (I use Python 2.7.3)
+    
+    BASIC PYTHON LIBRARIES (easy way! & has update versions) (I dont remember thas was a lot!!!) (Be patient!)
+
+    $ sudo apt-get install python-pip
+    $ sudo pip install pip -U         (for upgrade, reset the terminat to reload bash)
+    $ sudo pip install Sphinx         (Documentation)
+    $ sudo pip install nose           (Test packages and builds, also our work)
+    $ sudo apt-get install g++ gfortran
+    $ sudo pip install pyparsing Pillow
+    $ sudo apt-get install python-tk pyqtgraph (the last install scipy & numpy)
+    $ sudo apt-get install python-wxtools python-gtk2-dev python-cxx
+    
+    NOT So Importants but interensting
+    $ sudo apt-get install python-visual
+    (Build Mayavi: http://docs.enthought.com/mayavi/mayavi/installation.html)
+    
+    IMPORTANTS
+    $ sudo apt-get install python-dev (To install developer version)
+    (bulid cython from: https://github.com/cython/cython or type: sudo pip install cython)
+    $ sudo apt-get install libatlas-base-dev (Think is note necessary, but there are some other libraries that i think need it)
+    $ sudo pip install numpy scipy matplotlib sympy  (I think that this dont require a special build on the system)
+    
+   
+    
+    
+    IPYTHON: This is a new an exciting way to share with others the work done!
+    
+    Stable versionat day 1.1.0:
+    git repo at: https://github.com/ipython/ipython/tree/rel-1.1.0
+
+    Develop version 2.0: (Has some changes, in interfaz a lot!. I used and for me is stable):
+    git repo at: https://github.com/ipython/ipython
+
+    Bulding...
+    
+    Requiriments:
+	USER/dir/to/ipython/repo$ python setup.py
+	
+	For me says:
+	BUILDING IPYTHON
+              python: 2.7.3 (default, Sep 26 2013, 20:03:06)  [GCC 4.6.3]
+              platform: linux2
+
+	OPTIONAL DEPENDENCIES
+                sphinx: 1.2.1
+              pygments: 1.6
+                  nose: 1.3.0
+               pexpect: 2.3
+                 pyzmq: no (required for qtconsole, notebook, and parallel
+                        computing capabilities)
+               tornado: no (required for notebook)
+              readline: yes
+                jinja2: 2.7.2
+                
+      $ sudo pip install pyzmq tornado 
+      
+      Test if works:
+      
+      $ python -m IPython
+      
+      Install:
+      
+      $ sudo pip install -e ".[notebook]"
+      
+     
+
