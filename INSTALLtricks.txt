@@ -80,5 +80,93 @@ SECOND: PYTHON ENVIROMENT. (I use Python 2.7.3)
       
       $ sudo pip install -e ".[notebook]"
       
-     
+THIRD:  HARDEST PART!
+    Now we install CUDA 5.5, the examples, OpenCL AMD, and the respective 
+    python implementation.
+    
+    **** N V I D I A ****
+    Install the driver: <Ctrl> + <F2> (dont forget save the work)
+		       login...
+		       $ sudo apt-get remove --purge nvidia* (Delete all previous nvidia stuff)
+		       $ sudo service ligthmd stop
+		       $ chmod +x cudavesion.run
+		       $ sudo ./cudavesion.run
+		       Accept the terms
+		       $ sudo reboot
+		       (I you has a prblem with nouveau driver: 
+		       $ sudo echo nouveau >> /etc/modprobe.d/blacklist.conf)
+		       Good luck!
+    Now toolkit and Samples. Before install som libraries.
 
+      $ sudo apt-get install freeglut3-dev build-essential libx11-dev libxmu-dev 
+	libxi-dev libglu1-mesa-dev libglu1-mesa libglapi-mesa  libgl1-mesa-dri 
+	libgl1-mesa-dev libgl1-mesa-glx
+      $ sudo ln -s /usr/lib/x86_64-linux-gnu/libglut.so /usr/lib/libglut.so
+      $ sudo apt-get install libcr-dev mpich2 mpich2-doc
+      $ cd ~/NVIDIA_DISTR/
+      $ make (wait and check for errors X) 
+    **** O P E N C L **** 
+    (In fact If you have Nvidia CARD OpenCL is installed with the previous part)
+    We use AMD APP SDK.
+    Get in AMD web page. And Build (so easy tu build and many examples)
+    
+FOUTH PART: Get pyCUDA and pyOpenCL
+    Both of them are similar to build in our system.
+    Get with :
+    git clone --recursive http://git.tiker.net/trees/pycuda.git
+    git clone --recursive http://git.tiker.net/trees/pyopencl.git
+    
+    $ sudo apt-get install opencl-headers
+    
+    In both run: $ ./configure 
+    and in siteconf.py make true the GL optin to make amazing animations!
+    
+    Then install with
+    
+    $ make
+    $ sudo make install (don forget to test your instalation with the code in /tests)
+    
+    At this moment i find that include files like cutil_inline.h disapear in CUDA 5.5 but are require 
+    from pyCUDA, we just paste in the cuda 5.5 include files (cutil_inline.h and others can found in Cuda 4.2 SDK)
+    
+    I made to correct this:
+    $ sudo cp cutil* /usr/local/cuda-5.5/include/ (I have previous SDK in my HOME, UFF!)
+    $ sudo cp drvapi_error_string.h /usr/local/cuda-5.5/include/
+    
+OTHERS INTERESTING LIBRARIES:
+    PYOPENCL:
+    $ sudo pip install PyOpenGL PyOpenGL_accelerate
+    $ sudo apt-get install python-pyglew
+    
+    PYFFT: $ sudo easy_install pyfft
+    MAKO $ sudo pip install Mako
+    REIKNA: $python setup.py build
+	    $sudo make install
+    PYCULA: Try it but CULA is not Free
+    SCIKIT CUDA: CUBLAS & CUFFT extensions
+    MPI4PY: $ sudo apt-get install mpi-default-dev
+	    Build from $ git clone https://bitbucket.org/mpi4py/mpi4py.git
+    H5PY:
+	$ sudo apt-get install libhdf5-mpich-developer
+	$ sudo apt-get install libhdf5-serial-dev
+	$ git clone https://github.com/h5py/h5py.git
+	h5pyDIR $ python setup.py build
+	h5pyDIR $ sudo python setup.py install
+
+
+    MAYAVI:
+      sudo apt-get install python-vtk
+      sudo apt-get install python-wxgtk2.6
+      sudo apt-get install python-setuptools
+      sudo apt-get install python-configobj
+      sudo apt-get install python-traits
+      sudo apt-get install python-envisage
+      sudo easy_install "Mayavi[app]"
+      if wx problems:
+      sudo apt-get remove --purge python-wxgtk2.6 libwxgtk2.6-0
+      sudo apt-get install python-wxversion --reinstall
+      sudo apt-get install python-traitsui
+      sudo apt-get install python-apptools
+
+      
+      WELL i think is all!! 
